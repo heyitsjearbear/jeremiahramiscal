@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Design tokens. Tailwind v4 defines tokens in CSS via @theme (this project is
+  Tailwind v4, not v3 — there is no tailwind.config.ts). Every value from the
+  design spec lives here as a named token; pages reference utilities only.
+*/
+@theme {
+  /* Colors */
+  --color-bg: #0f0f13;
+  --color-primary: #e8e8ea;
+  --color-heading: #f0f0f2;
+  --color-body: #cfcfd6;
+  --color-muted: #9a9aa3;
+  --color-subtle: #6b6b75;
+  --color-faint: #5a5a64;
+  --color-faintest: #56565f;
+  --color-accent: #4a9eff;
+
+  /* Fonts (families supplied by next/font via the variables below) */
+  --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-reading: var(--font-newsreader), Georgia, serif;
+
+  /* Spacing */
+  --spacing-sidebar: 200px;
+  --spacing-post-gap: 58px;
+
+  /* Sidebar padding: 46px 30px 38px */
+  --spacing-sb-t: 46px;
+  --spacing-sb-x: 30px;
+  --spacing-sb-b: 38px;
+
+  /* Main padding: 92px 72px 150px 120px */
+  --spacing-main-t: 92px;
+  --spacing-main-r: 72px;
+  --spacing-main-b: 150px;
+  --spacing-main-l: 120px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: var(--font-sans);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
