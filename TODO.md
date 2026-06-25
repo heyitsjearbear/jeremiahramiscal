@@ -76,4 +76,4 @@ The original spec assumed Next 14 + Tailwind v3 + plain Sanity. The scaffold was
 **Single source of truth for identity:** `src/lib/site.ts` (name, author, tagline, description, url).
 **Single source of truth for colors:** `src/app/globals.css` `@theme` block.
 
-> The stack handles the infrastructure. The rest is writing — publish consistently, be specific, link posts to each other over time.
+> The stack handles the infrastructure. The rest is writing — publish consistently, be specific, link posts to each other over time. hi
