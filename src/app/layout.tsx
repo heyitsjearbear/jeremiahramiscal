@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Newsreader } from "next/font/google";
 import "./globals.css";
 import SidebarNav from "@/components/SidebarNav";
+import { SITE } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -18,8 +19,12 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Inkwell",
-  description: "Notes, essays & fiction by one person.",
+  metadataBase: new URL(SITE.url),
+  title: {
+    template: `%s | ${SITE.name}`,
+    default: SITE.name,
+  },
+  description: SITE.description,
 };
 
 export default function RootLayout({

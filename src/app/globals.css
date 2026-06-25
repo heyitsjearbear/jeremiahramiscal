@@ -16,6 +16,9 @@
   --color-faint: #5a5a64;
   --color-faintest: #56565f;
   --color-accent: #4a9eff;
+  /* Resume-specific shades from the design */
+  --color-resume-title: #d8d8dc;
+  --color-resume-detail: #8a8a94;
 
   /* Fonts (families supplied by next/font via the variables below) */
   --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
