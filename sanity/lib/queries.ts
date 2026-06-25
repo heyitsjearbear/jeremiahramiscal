@@ -1,8 +1,9 @@
 import { groq } from "next-sanity";
 import { serverClient } from "./client";
 
-// Revalidate cached fetches once an hour by default.
-const REVALIDATE = 3600;
+// Revalidate cached fetches once an hour in production (ISR). In dev, skip the
+// cache entirely so newly-published Sanity content shows on the next refresh.
+const REVALIDATE = process.env.NODE_ENV === "development" ? 0 : 3600;
 
 const allPostsQuery = groq`
   *[_type == "post"] | order(publishedAt desc) {

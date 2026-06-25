@@ -42,7 +42,8 @@ export async function generateMetadata({
   const url = `${SITE.url}/blog/${slug}`;
   const ogImage = post.seo?.ogImage
     ? urlFor(post.seo.ogImage as never).width(1200).height(630).url()
-    : "/default-og.png";
+    : // TODO: replace /public/default-og.png with a real 1200x630 OG image before launch
+      "/default-og.png";
 
   return {
     title,
@@ -80,8 +81,23 @@ export default async function PostPage({
     .filter(Boolean)
     .join(" · ");
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: { "@type": "Person", name: SITE.author, url: SITE.url },
+    url: `${SITE.url}/blog/${slug}`,
+  };
+
   return (
     <article className="max-w-[65ch]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Link href="/" className="text-[13px] tracking-[0.02em] text-accent">
         ← Writing
       </Link>
