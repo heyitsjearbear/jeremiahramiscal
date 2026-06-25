@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { PortableTextBlock } from "@portabletext/react";
@@ -15,7 +16,7 @@ type Post = {
   publishedAt?: string;
   category?: string;
   body?: PortableTextBlock[];
-  featuredImage?: { alt?: string };
+  featuredImage?: { alt?: string; asset?: { _ref: string } };
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -40,8 +41,10 @@ export async function generateMetadata({
   const title = post.seo?.metaTitle || post.title;
   const description = post.seo?.metaDescription || post.excerpt || "";
   const url = `${SITE.url}/blog/${slug}`;
-  const ogImage = post.seo?.ogImage
-    ? urlFor(post.seo.ogImage as never).width(1200).height(630).url()
+  // OG image priority: explicit seo.ogImage → featuredImage → static default.
+  const ogSource = post.seo?.ogImage ?? post.featuredImage;
+  const ogImage = ogSource
+    ? urlFor(ogSource as never).width(1200).height(630).url()
     : // TODO: replace /public/default-og.png with a real 1200x630 OG image before launch
       "/default-og.png";
 
@@ -81,11 +84,20 @@ export default async function PostPage({
     .filter(Boolean)
     .join(" · ");
 
+  // Rendered featured image (responsive) and an absolute URL for structured data.
+  const featuredSrc = post.featuredImage?.asset
+    ? urlFor(post.featuredImage as never).width(1600).url()
+    : null;
+  const jsonLdImage = post.featuredImage?.asset
+    ? urlFor(post.featuredImage as never).width(1200).height(630).url()
+    : `${SITE.url}/default-og.png`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
+    image: [jsonLdImage],
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
     author: { "@type": "Person", name: SITE.author, url: SITE.url },
@@ -107,6 +119,18 @@ export default async function PostPage({
       {meta ? (
         <div className="mt-5 text-[13px] uppercase tracking-[0.05em] text-subtle">
           {meta}
+        </div>
+      ) : null}
+      {featuredSrc ? (
+        <div className="relative mt-[42px] aspect-[16/9] w-full overflow-hidden rounded-md">
+          <Image
+            src={featuredSrc}
+            alt={post.featuredImage?.alt ?? post.title}
+            fill
+            className="object-cover"
+            sizes="(min-width: 768px) 65ch, 100vw"
+            priority
+          />
         </div>
       ) : null}
       <div className="mt-[42px]">
