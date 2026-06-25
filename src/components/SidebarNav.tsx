@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SITE } from "@/lib/site";
 
 const NAV_ITEMS = [
   { label: "Writing", href: "/" },
@@ -17,7 +18,7 @@ const SOCIAL_LINKS = [
   { label: "tiktok", href: "https://tiktok.com" },
   { label: "instagram", href: "https://instagram.com" },
   { label: "linkedin", href: "https://linkedin.com" },
-  { label: "rss", href: "/rss.xml" },
+  { label: "rss", href: "/feed.xml" },
 ];
 
 export default function SidebarNav() {
@@ -33,10 +34,10 @@ export default function SidebarNav() {
       <div>
         <Link href="/" className="block">
           <div className="text-[19px] font-bold tracking-[-0.02em] text-primary">
-            Inkwell
+            {SITE.name}
           </div>
           <div className="mt-[7px] text-[12px] leading-[1.45] text-subtle">
-            Notes, essays &amp; fiction by one person.
+            {SITE.tagline}
           </div>
         </Link>
 

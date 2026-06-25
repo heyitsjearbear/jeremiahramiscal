@@ -1,9 +1,67 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPost, posts } from "@/lib/posts";
+import type { PortableTextBlock } from "@portabletext/react";
+import PortableBody from "@/components/PortableBody";
+import { getAllPostSlugs, getPost } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
+import { formatDate } from "@/lib/format";
+import { SITE } from "@/lib/site";
 
-export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
+type Post = {
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  publishedAt?: string;
+  category?: string;
+  body?: PortableTextBlock[];
+  featuredImage?: { alt?: string };
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: unknown;
+  };
+};
+
+export async function generateStaticParams() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = (await getPost(slug)) as Post | null;
+  if (!post) return {};
+
+  const title = post.seo?.metaTitle || post.title;
+  const description = post.seo?.metaDescription || post.excerpt || "";
+  const url = `${SITE.url}/blog/${slug}`;
+  const ogImage = post.seo?.ogImage
+    ? urlFor(post.seo.ogImage as never).width(1200).height(630).url()
+    : "/default-og.png";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime: post.publishedAt,
+      url,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function PostPage({
@@ -12,35 +70,31 @@ export default async function PostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = (await getPost(slug)) as Post | null;
 
   if (!post) {
     notFound();
   }
 
+  const meta = [formatDate(post.publishedAt), post.category]
+    .filter(Boolean)
+    .join(" · ");
+
   return (
     <article className="max-w-[65ch]">
-      <Link
-        href="/"
-        className="text-[13px] tracking-[0.02em] text-accent"
-      >
+      <Link href="/" className="text-[13px] tracking-[0.02em] text-accent">
         ← Writing
       </Link>
       <h1 className="mt-[30px] text-[clamp(34px,5vw,58px)] font-bold leading-[1.05] tracking-[-0.025em] text-heading">
         {post.title}
       </h1>
-      <div className="mt-5 text-[13px] uppercase tracking-[0.05em] text-subtle">
-        {post.date} · {post.tags}
-      </div>
+      {meta ? (
+        <div className="mt-5 text-[13px] uppercase tracking-[0.05em] text-subtle">
+          {meta}
+        </div>
+      ) : null}
       <div className="mt-[42px]">
-        {post.body.map((para, i) => (
-          <p
-            key={i}
-            className="mb-[1.5em] font-reading text-[19px] leading-[1.78] text-body"
-          >
-            {para}
-          </p>
-        ))}
+        {post.body ? <PortableBody value={post.body} /> : null}
       </div>
     </article>
   );

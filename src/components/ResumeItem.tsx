@@ -11,10 +11,10 @@ export default function ResumeItem({ year, title, detail }: ResumeItemData) {
         {year}
       </div>
       <div>
-        <div className="text-[16px] font-medium leading-[1.35] text-body">
+        <div className="text-[16px] font-medium leading-[1.35] text-resume-title">
           {title}
         </div>
-        <div className="mt-[3px] font-reading text-[15px] leading-[1.4] text-muted">
+        <div className="mt-[3px] font-reading text-[15px] leading-[1.4] text-resume-detail">
           {detail}
         </div>
       </div>
