@@ -30,7 +30,7 @@ export default function SidebarNav() {
       : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <aside className="flex w-full flex-col justify-between gap-8 px-6 py-8 md:fixed md:left-0 md:top-0 md:h-screen md:w-sidebar md:gap-0 md:px-sb-x md:pt-sb-t md:pb-sb-b">
+    <aside className="flex w-full flex-col justify-between gap-8 bg-sidebar px-6 py-8 md:fixed md:left-0 md:top-0 md:h-screen md:w-sidebar md:gap-0 md:px-sb-x md:pt-sb-t md:pb-sb-b">
       <div>
         <Link href="/" className="block">
           <div className="text-[19px] font-bold tracking-[-0.02em] text-primary">

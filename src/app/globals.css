@@ -6,19 +6,20 @@
   design spec lives here as a named token; pages reference utilities only.
 */
 @theme {
-  /* Colors */
-  --color-bg: #0f0f13;
-  --color-primary: #e8e8ea;
-  --color-heading: #f0f0f2;
-  --color-body: #cfcfd6;
-  --color-muted: #9a9aa3;
-  --color-subtle: #6b6b75;
-  --color-faint: #5a5a64;
-  --color-faintest: #56565f;
-  --color-accent: #4a9eff;
-  /* Resume-specific shades from the design */
-  --color-resume-title: #d8d8dc;
-  --color-resume-detail: #8a8a94;
+  /* Colors — Sweetie 16 palette, mapped from the editor theme */
+  --color-bg: #080810;
+  --color-sidebar: #050508;
+  --color-primary: #e7edf2;
+  --color-heading: #f4f4f4;
+  --color-body: #c3ced8;
+  --color-muted: #94b0c2;
+  --color-subtle: #566c86;
+  --color-faint: #44506b;
+  --color-faintest: #333c57;
+  --color-accent: #41a6f6;
+  /* Resume-specific shades (cool-toned to match the palette) */
+  --color-resume-title: #d3dde4;
+  --color-resume-detail: #7d91a6;
 
   /* Fonts (families supplied by next/font via the variables below) */
   --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
