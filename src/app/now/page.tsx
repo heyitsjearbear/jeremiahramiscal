@@ -10,8 +10,9 @@ export default function NowPage() {
       <h1 className="text-[clamp(32px,4.5vw,50px)] font-bold leading-[1.05] tracking-[-0.025em] text-heading">
         Now
       </h1>
-      <div className="mt-[18px] text-[13px] uppercase tracking-[0.05em] text-subtle">
-        Updated June 2026
+      <div className="mt-[18px] text-[13px] uppercase tracking-[0.05em] text-syntax-comment">
+        <span className="italic">// updated</span>{" "}
+        <span className="text-syntax-number">2026-06</span>
       </div>
       <div className="mt-[42px]">
         {PARAGRAPHS.map((para, i) => (

@@ -15,8 +15,8 @@ export default async function Home() {
 
   return (
     <div className="max-w-[720px]">
-      <div className="mb-12 text-[12px] uppercase tracking-[0.14em] text-faint">
-        Selected writing
+      <div className="mb-12 text-[12px] italic tracking-[0.14em] text-syntax-comment">
+        // Selected writing
       </div>
       <div className="flex flex-col gap-post-gap">
         {posts.map((post) => (

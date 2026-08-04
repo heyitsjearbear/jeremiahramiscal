@@ -17,7 +17,6 @@ const SOCIAL_LINKS = [
   { label: "tiktok", href: "https://www.tiktok.com/@jeremiahyaps" },
   { label: "instagram", href: "https://www.instagram.com/jeremiahyaps/" },
   { label: "linkedin", href: "https://www.linkedin.com/in/jeremiah-ramiscal/" },
-  { label: "rss", href: "/feed.xml" },
 ];
 
 export default function SidebarNav() {
@@ -32,11 +31,17 @@ export default function SidebarNav() {
     <aside className="flex w-full flex-col justify-between gap-8 bg-sidebar px-6 py-8 md:fixed md:left-0 md:top-0 md:h-screen md:w-sidebar md:gap-0 md:px-sb-x md:pt-sb-t md:pb-sb-b">
       <div>
         <Link href="/" className="block">
-          <div className="text-[19px] font-bold tracking-[-0.02em] text-primary">
-            {SITE.name}
+          <div className="text-[16.5px] font-bold tracking-[-0.02em]">
+            <span className="text-syntax-keyword">const</span>{" "}
+            <span className="text-syntax-function">me</span>
+            <span className="text-primary"> = </span>
+            <span className="text-syntax-string">
+              &quot;{SITE.name}&quot;
+            </span>
+            <span className="text-syntax-comment">;</span>
           </div>
-          <div className="mt-[7px] text-[12px] leading-[1.45] text-subtle">
-            {SITE.tagline}
+          <div className="mt-[7px] text-[12px] italic leading-[1.45] text-syntax-comment">
+            // {SITE.tagline}
           </div>
         </Link>
 
@@ -49,11 +54,13 @@ export default function SidebarNav() {
                 href={item.href}
                 className={`text-[14.5px] transition-transform duration-150 hover:translate-x-[3px] ${
                   active
-                    ? "font-medium text-primary"
+                    ? "font-medium text-syntax-keyword"
                     : "font-normal text-subtle"
                 }`}
               >
-                {item.label}
+                <span className="text-syntax-function">
+                  {item.label.toLowerCase()}
+                </span>
               </Link>
             );
           })}
@@ -67,6 +74,7 @@ export default function SidebarNav() {
             href={link.href}
             className="text-[12px] tracking-[0.03em] text-faint transition-colors duration-150 hover:text-accent"
           >
+            <span className="text-syntax-type">.</span>
             {link.label}
           </a>
         ))}

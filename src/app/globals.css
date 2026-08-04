@@ -21,6 +21,14 @@
   --color-resume-title: #d3dde4;
   --color-resume-detail: #7d91a6;
 
+  /* Syntax-highlight accents — mirrors the editor theme's token colors */
+  --color-syntax-keyword: #bb9af7;
+  --color-syntax-string: #9ece6a;
+  --color-syntax-type: #f7768e;
+  --color-syntax-number: #ff9e64;
+  --color-syntax-function: #7aa2f7;
+  --color-syntax-comment: #565f89;
+
   /* Fonts (families supplied by next/font via the variables below) */
   --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
   --font-reading: var(--font-newsreader), Georgia, serif;

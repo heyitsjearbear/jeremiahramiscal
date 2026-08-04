@@ -17,7 +17,7 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <article>
-      <div className="text-[13px] uppercase tracking-[0.05em] text-subtle">
+      <div className="text-[13px] uppercase tracking-[0.05em] text-syntax-number">
         {date}
       </div>
       <Link
@@ -28,12 +28,12 @@ export default function PostCard({
       </Link>
       {excerpt ? (
         <p className="mt-[13px] max-w-[560px] font-reading text-[18px] leading-[1.5] text-muted">
-          {excerpt}
+          <span className="text-syntax-string">&quot;{excerpt}&quot;</span>
         </p>
       ) : null}
       {tags ? (
-        <div className="mt-[13px] text-[13px] tracking-[0.02em] text-faintest">
-          {tags}
+        <div className="mt-[13px] text-[13px] tracking-[0.02em] text-syntax-type">
+          #{tags}
         </div>
       ) : null}
     </article>

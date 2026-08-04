@@ -80,9 +80,14 @@ export default async function PostPage({
     notFound();
   }
 
-  const meta = [formatDate(post.publishedAt), post.category]
-    .filter(Boolean)
-    .join(" · ");
+  const metaParts = [
+    post.publishedAt
+      ? { text: formatDate(post.publishedAt), className: "text-syntax-number" }
+      : null,
+    post.category
+      ? { text: post.category, className: "text-syntax-type" }
+      : null,
+  ].filter((part): part is { text: string; className: string } => part !== null);
 
   // Rendered featured image (responsive) and an absolute URL for structured data.
   const featuredSrc = post.featuredImage?.asset
@@ -116,9 +121,14 @@ export default async function PostPage({
       <h1 className="mt-[30px] text-[clamp(34px,5vw,58px)] font-bold leading-[1.05] tracking-[-0.025em] text-heading">
         {post.title}
       </h1>
-      {meta ? (
+      {metaParts.length ? (
         <div className="mt-5 text-[13px] uppercase tracking-[0.05em] text-subtle">
-          {meta}
+          {metaParts.map((part, i) => (
+            <span key={part.text}>
+              {i > 0 ? <span className="text-faint"> · </span> : null}
+              <span className={part.className}>{part.text}</span>
+            </span>
+          ))}
         </div>
       ) : null}
       {featuredSrc ? (

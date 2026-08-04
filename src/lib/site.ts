@@ -4,7 +4,7 @@
 export const SITE = {
   name: "Jeremiah Ramiscal",
   author: "Jeremiah Ramiscal",
-  tagline: "Notes, essays & fiction by one person.",
+  tagline: "random thoughts and opinions about tech and everyday life.",
   description:
     "Personal site of Jeremiah Ramiscal — essays, fiction, and creative writing.",
   url: "https://jeremiahramiscal.com",
