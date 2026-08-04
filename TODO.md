@@ -28,7 +28,7 @@ The original spec assumed Next 14 + Tailwind v3 + plain Sanity. The scaffold was
 
 - [ ] **Real social links** — `src/components/SidebarNav.tsx` still has 7 placeholder URLs (email/x/youtube/tiktok/instagram/linkedin). `rss` already points to `/feed.xml`. Give handles and these get swapped.
 - [ ] **`/public/llms.txt`** — plain-text site summary for AI crawlers (template in the spec's Phase 5).
-- [ ] **Google Search Console meta** — add the verification tag to root metadata in `src/app/layout.tsx` once you have the property string (or verify via DNS instead).
+- [ ] **(Optional) Google Search Console meta** — add the verification tag to root metadata in `src/app/layout.tsx` once you have the property string (or verify via DNS instead).
 
 ---
 
@@ -52,7 +52,7 @@ The original spec assumed Next 14 + Tailwind v3 + plain Sanity. The scaffold was
   - `http://localhost:3000` — added via Studio's "Add development host" ✅ (re-add here if it ever errors)
   - `https://jeremiahramiscal.com` — **pending** (and your `*.vercel.app` URL if you'll use Studio there)
 - [ ] **Register Studio on prod** — visiting `jeremiahramiscal.com/studio` will show the connect screen; click **Register this studio**.
-- [ ] **Google Search Console** — add property, verify, submit `https://jeremiahramiscal.com/sitemap.xml`, check Coverage in 3–5 days.
+- [ ] **(Optional) Google Search Console** — add property, verify, submit `https://jeremiahramiscal.com/sitemap.xml`, check Coverage in 3–5 days.
 
 ---
 

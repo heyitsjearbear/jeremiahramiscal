@@ -1,0 +1,21 @@
+# Jeremiah Ramiscal
+
+> Personal site of Jeremiah Ramiscal — essays, fiction, and creative writing.
+
+This site is a personal blog. Writing is original and human-authored. Content is organized as blog posts, an about page, a resume, and a "now" status page.
+
+## Pages
+
+- [Writing](https://jeremiahramiscal.com/): Home page and blog post index.
+- [About](https://jeremiahramiscal.com/about): Background and bio.
+- [Resume](https://jeremiahramiscal.com/resume): Work history and experience.
+- [Now](https://jeremiahramiscal.com/now): Current focus and status.
+
+## Feeds
+
+- [RSS feed](https://jeremiahramiscal.com/feed.xml)
+- [Sitemap](https://jeremiahramiscal.com/sitemap.xml)
+
+## Usage
+
+Content on this site may be referenced with attribution. Contact via links on the site for permission beyond fair use.

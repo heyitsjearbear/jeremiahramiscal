@@ -12,12 +12,11 @@ const NAV_ITEMS = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "email", href: "mailto:hello@example.com" },
-  { label: "x", href: "https://x.com" },
-  { label: "youtube", href: "https://youtube.com" },
-  { label: "tiktok", href: "https://tiktok.com" },
-  { label: "instagram", href: "https://instagram.com" },
-  { label: "linkedin", href: "https://linkedin.com" },
+  { label: "x", href: "https://x.com/jeremiahyaps" },
+  { label: "youtube", href: "https://www.youtube.com/@heyitsjearbear" },
+  { label: "tiktok", href: "https://www.tiktok.com/@jeremiahyaps" },
+  { label: "instagram", href: "https://www.instagram.com/jeremiahyaps/" },
+  { label: "linkedin", href: "https://www.linkedin.com/in/jeremiah-ramiscal/" },
   { label: "rss", href: "/feed.xml" },
 ];
 
