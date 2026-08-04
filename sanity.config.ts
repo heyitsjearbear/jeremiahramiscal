@@ -25,10 +25,21 @@ export default defineConfig({
                   .schemaType("resume")
                   .documentId(RESUME_DOC_ID),
               ),
+            // Now entries — newest first, since the newest one is the live /now.
+            S.listItem()
+              .title("Now entries")
+              .id("nowEntry")
+              .child(
+                S.documentTypeList("nowEntry")
+                  .title("Now entries")
+                  .defaultOrdering([
+                    { field: "effectiveFrom", direction: "desc" },
+                  ]),
+              ),
             S.divider(),
             // Everything else as normal lists.
             ...S.documentTypeListItems().filter(
-              (item) => item.getId() !== "resume",
+              (item) => !["resume", "nowEntry"].includes(item.getId() ?? ""),
             ),
           ]),
     }),

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Newsreader } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import SidebarNav from "@/components/SidebarNav";
 import RetroAdRail from "@/components/RetroAdRail";
 import RetroAdBanner from "@/components/RetroAdBanner";

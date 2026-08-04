@@ -45,6 +45,15 @@ const resumeQuery = groq`
   }
 `;
 
+// Newest first: [0] is the live /now, the rest are the trail below it.
+const nowEntriesQuery = groq`
+  *[_type == "nowEntry" && defined(effectiveFrom)] | order(effectiveFrom desc) {
+    _id,
+    effectiveFrom,
+    body
+  }
+`;
+
 export async function getAllPosts() {
   return serverClient.fetch(
     allPostsQuery,
@@ -68,6 +77,14 @@ export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
 export async function getResume() {
   return serverClient.fetch(
     resumeQuery,
+    {},
+    { next: { revalidate: REVALIDATE } },
+  );
+}
+
+export async function getNowEntries() {
+  return serverClient.fetch(
+    nowEntriesQuery,
     {},
     { next: { revalidate: REVALIDATE } },
   );

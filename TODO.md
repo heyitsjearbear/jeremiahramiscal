@@ -39,7 +39,7 @@ The original spec assumed Next 14 + Tailwind v3 + plain Sanity. The scaffold was
 - [ ] **Fix the test post** — `my-first-blog` has excerpt literally `"excerpt"`; it shows in RSS + JSON-LD descriptions. Replace, or delete the post.
 - [ ] **Fill `seo.metaDescription`** on important posts — this is what shows in Google results.
 - [ ] **`/about` content** — edit `src/app/about/page.tsx` (real bio; currently placeholder).
-- [ ] **`/now` content** — edit `src/app/now/page.tsx` (real status; currently placeholder).
+- [ ] **`/now` content** — now Sanity-driven. `/studio` → **Now entries** → publish a new entry each time (don't edit the old one — past entries are the trail that renders under `// previously`).
 
 ---
 

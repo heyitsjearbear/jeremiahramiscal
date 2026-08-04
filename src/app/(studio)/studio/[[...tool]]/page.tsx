@@ -6,7 +6,8 @@
  */
 
 import { NextStudio } from "next-sanity/studio";
-import config from "../../../../sanity.config";
+// Five levels up: [[...tool]] → studio → (studio) → app → src → repo root.
+import config from "../../../../../sanity.config";
 
 export const dynamic = "force-dynamic";
 
