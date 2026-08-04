@@ -6,6 +6,6 @@ export const SITE = {
   author: "Jeremiah Ramiscal",
   tagline: "random thoughts and opinions about tech and everyday life.",
   description:
-    "Personal site of Jeremiah Ramiscal — essays, fiction, and creative writing.",
+    "Personal site of Jeremiah Ramiscal — random thoughts and opinions about tech and everyday life.",
   url: "https://jeremiahramiscal.com",
 } as const;

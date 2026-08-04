@@ -1,6 +1,6 @@
 # Jeremiah Ramiscal
 
-> Personal site of Jeremiah Ramiscal — essays, fiction, and creative writing.
+> Personal site of Jeremiah Ramiscal — random thoughts and opinions about tech and everyday life.
 
 This site is a personal blog. Writing is original and human-authored. Content is organized as blog posts, an about page, a resume, and a "now" status page.
 

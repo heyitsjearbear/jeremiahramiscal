@@ -57,6 +57,29 @@ html {
   font-family: var(--font-sans);
 }
 
+/*
+  Cat cursor. Applied to * so it survives elements that set their own cursor
+  (links, buttons, text) — otherwise it flips back to an arrow or I-beam on
+  hover and the effect reads as broken.
+
+  Two declarations on purpose: the first is the universally-supported fallback,
+  the second upgrades to the 2x asset on retina and is simply ignored by
+  browsers without image-set(). Hotspot is centered (24 24) because the art is
+  a circle — the click point should be the middle of the blob, not a corner.
+
+  /studio is unaffected: it has its own root layout that deliberately does not
+  import this file, so Sanity keeps its native text/resize cursors.
+*/
+* {
+  cursor: url("/cat-cursor.png") 24 24, auto;
+  cursor: image-set(
+        url("/cat-cursor@2x.png") 2x,
+        url("/cat-cursor.png") 1x
+      )
+      24 24,
+    auto;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-primary);
