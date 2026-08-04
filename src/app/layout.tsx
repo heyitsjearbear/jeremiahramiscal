@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Newsreader } from "next/font/google";
 import "./globals.css";
 import SidebarNav from "@/components/SidebarNav";
+import RetroAdRail from "@/components/RetroAdRail";
+import RetroAdBanner from "@/components/RetroAdBanner";
 import { SITE } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
@@ -40,8 +42,10 @@ export default function RootLayout({
       <body>
         <SidebarNav />
         <main className="ml-0 px-6 pt-20 pb-24 md:ml-sidebar md:pt-main-t md:pr-main-r md:pb-main-b md:pl-main-l">
+          <RetroAdBanner />
           {children}
         </main>
+        <RetroAdRail />
       </body>
     </html>
   );

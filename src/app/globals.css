@@ -71,3 +71,83 @@ a {
   background: var(--color-accent);
   color: var(--color-bg);
 }
+
+/* Retro ad unit keyframes — 2000s webring / banner-ad pastiche */
+@keyframes retro-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes retro-marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes retro-rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes retro-wiggle {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes retro-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.retro-blink {
+  animation: retro-blink 1s steps(1) infinite;
+}
+
+.retro-marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: retro-marquee 9s linear infinite;
+}
+
+.retro-rainbow {
+  animation: retro-rainbow 4s linear infinite;
+}
+
+.retro-wiggle {
+  animation: retro-wiggle 0.35s ease-in-out infinite;
+  display: inline-block;
+}
+
+.retro-shine {
+  background-size: 200% 100%;
+  animation: retro-shine 2.5s linear infinite;
+}
+
+.retro-bevel {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #f4f4f4 #444 #444 #f4f4f4;
+  box-shadow: inset 0 0 0 1px #000;
+}
