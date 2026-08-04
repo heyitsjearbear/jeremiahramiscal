@@ -14,6 +14,7 @@ const NAV_ITEMS = [
 const SOCIAL_LINKS = [
   { label: "x", href: "https://x.com/jeremiahyaps" },
   { label: "youtube", href: "https://www.youtube.com/@heyitsjearbear" },
+  { label: "twitch", href: "https://www.twitch.tv/heyitsjearbear" },
   { label: "tiktok", href: "https://www.tiktok.com/@jeremiahyaps" },
   { label: "instagram", href: "https://www.instagram.com/jeremiahyaps/" },
   { label: "linkedin", href: "https://www.linkedin.com/in/jeremiah-ramiscal/" },
