@@ -1,6 +1,6 @@
 # TODO — jeremiahramiscal.com
 
-**Status:** Specs 1–4 are **code-complete and building green**. What's left is content, deployment, and external/manual config. Nothing below is blocked by code.
+**Status:** Specs 1–4 are **code-complete and building green**. What's left is content, deployment, external/manual config — plus one new feature not in the original specs: a **Projects section** (see below).
 
 ---
 
@@ -29,6 +29,40 @@ The original spec assumed Next 14 + Tailwind v3 + plain Sanity. The scaffold was
 - [ ] **Real social links** — `src/components/SidebarNav.tsx` still has 7 placeholder URLs (email/x/youtube/tiktok/instagram/linkedin). `rss` already points to `/feed.xml`. Give handles and these get swapped.
 - [ ] **`/public/llms.txt`** — plain-text site summary for AI crawlers (template in the spec's Phase 5).
 - [ ] **(Optional) Google Search Console meta** — add the verification tag to root metadata in `src/app/layout.tsx` once you have the property string (or verify via DNS instead).
+
+---
+
+## ⬜ Planned — Projects section (+ playable C++/WASM demos)
+
+**Status:** not built. Verified 2026-08-05 — no `projects` schema (`sanity/schemaTypes/` has only `post`, `resume`, `nowEntry`), no `/projects` route, no nav item in `src/components/SidebarNav.tsx`.
+
+**Why:** a C++ CLI tool is in progress in a separate repo (out of scope here). When it's done it should live on the site as a *runnable* demo — compiled to WebAssembly and driven from an in-browser terminal — not just a screenshot and a GitHub link.
+
+### Phase A — the section itself (can be done now, doesn't wait on the C++ project)
+- [ ] **`projects` schema** — `sanity/schemaTypes/project.ts`, registered in `schemaTypes/index.ts`. Fields: `title`, `slug`, `summary`, `body` (Portable Text, reuse `PortableBody`), `tech[]` (string tags), `repoUrl`, `liveUrl`, `coverImage`, `status` (wip / shipped / archived), `featured` (bool), `startedAt` / `shippedAt`, `seo` (same object `post` uses), plus `demo` (see Phase B).
+- [ ] **Routes** — `src/app/(site)/projects/page.tsx` (index) and `projects/[slug]/page.tsx` (detail). Mirror the blog's patterns: `generateStaticParams`, `generateMetadata` off `seo` → `summary` → root default, and the same dev/prod `revalidate` split (`0` / `3600`).
+- [ ] **Queries** — add to `sanity/lib/queries.ts`; a `PostCard`-style `ProjectCard`.
+- [ ] **Nav** — add `{ label: "Projects", href: "/projects" }` to `NAV` in `SidebarNav.tsx` (after Writing).
+- [ ] **Studio structure** — add a Projects list item in `sanity.config.ts`, ordered by `featured` then `shippedAt desc`.
+- [ ] **SEO** — `src/app/sitemap.ts`: `/projects` at 0.7, `/projects/[slug]` at 0.8. Consider `SoftwareSourceCode` JSON-LD on detail pages.
+
+### Phase B — hosting the C++ CLI as a WASM demo
+Build (in the C++ repo, not here):
+- [ ] Install the **Emscripten SDK**; swap `g++`/`clang++` for `emcc`.
+- [ ] `emcc main.cpp -o tool.js -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]'` → emits `tool.js` (glue) + `tool.wasm`. Consider **twr-wasm**, which wires up stdin/stdout/stderr for shell-style C++ instead of hand-rolling it.
+- [ ] Emit build artifacts into this repo under `public/demos/<slug>/` (`tool.js`, `tool.wasm`). Keep it a copy step / git submodule — don't vendor the C++ source here.
+
+Front end (in this repo):
+- [ ] Client component `src/components/WasmTerminal.tsx` — **xterm.js** in the browser, `"use client"`, mounted via `next/dynamic` with `ssr: false` (xterm touches `window`).
+- [ ] Load `tool.js` at runtime (script tag or dynamic import), instantiate the module, pipe xterm keystrokes → C++ stdin and stdout/stderr → xterm. Set `locateFile` so the glue finds `tool.wasm` under `public/demos/<slug>/`.
+- [ ] Wire it to Sanity: a `demo` object on the project doc (`kind: 'wasm-terminal'`, `basePath`, `entryScript`) so the detail page renders the terminal only when a demo exists.
+- [ ] Lazy-load — don't ship the `.wasm` on page load; instantiate behind a "run it" button.
+
+Deploy / config:
+- [ ] Vercel serves `.wasm` as `application/wasm` already — **verify** in prod (`curl -I`) rather than assume. If it's wrong, add a header rule in `next.config.ts`.
+- [ ] If the build ever uses pthreads/SharedArrayBuffer, it needs `Cross-Origin-Opener-Policy: same-origin` + `Cross-Origin-Embedder-Policy: require-corp` — those are cross-origin-isolation headers and **will interact with the existing security headers**, so scope them to the demo routes only.
+- [ ] Check the `.wasm` size against the site's current weight; add a caching header (`immutable`, hashed filename) if it's large.
+- [ ] Graceful fallback: no-WASM browser → show usage docs + the repo link instead of a dead terminal.
 
 ---
 
